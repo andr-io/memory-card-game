@@ -40,7 +40,7 @@ a:hover {
     background-image: url('img/moonless.svg');
     background-size: cover;
 
-    perspective: 550px;
+    perspective: 750px;
     overflow: hidden;
 }
 
@@ -199,7 +199,7 @@ a:hover {
 
     gap: 8px;
 
-    perspective: 600px;
+    perspective: 1000px;
 }
 
 #falling-star {
