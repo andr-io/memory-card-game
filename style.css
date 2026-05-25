@@ -1,0 +1,300 @@
+@font-face {
+    font-family: 'Ubuntu mono';
+    src: url('font/UbuntuMono-Regular.ttf');
+}
+
+body {
+    margin: 0;
+    margin-bottom: 10px;
+    background: #4A4775;
+    
+    color: rgb(222, 217, 217);
+
+    font-family: "Ubuntu mono";
+}
+
+h1 {
+    margin: 14px;
+}
+
+summary {
+    cursor: pointer;
+
+    padding: 4px;
+}
+
+a {
+    padding: 0.2rem 1rem;
+    border-radius: 8px;
+}
+
+a:link {
+    color: rgb(228, 234, 243);
+}
+
+a:hover {
+    background-color: #6b5f74;
+}
+
+.sky {
+    background-image: url('img/moonless.svg');
+    background-size: cover;
+
+    perspective: 550px;
+    overflow: hidden;
+}
+
+.moon {
+    background-image: url('img/moonfull.svg');
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.top-bar {
+    width: 85vmin;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    justify-items: center;
+}
+
+.top-bar h1 {
+    display: inline-block;
+    grid-column: 2;
+}
+
+.game-card {
+    width: 100%;
+    height: 100%;
+
+    display: inline-block;
+    position: relative;
+
+    transform-style: preserve-3d;
+
+    transition: transform 0.5s cubic-bezier(.86,0,.07,1);
+}
+
+.game-card[data-flipped='false']:hover {
+    cursor: pointer;
+
+    box-shadow: 0 0 3px 1px rgb(31, 170, 170);
+
+    border-radius: 10px;
+}
+
+.game-card-common {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+
+    background-size: cover;
+
+    position: absolute;
+    backface-visibility: hidden;
+
+    border-radius: 10px;
+}
+
+.game-card-front {
+    transform: rotateY(180deg);
+}
+
+.game-card-back {
+    background-image: url('img/card_back.webp');
+}
+
+.flipped {
+    transform: rotateY(180deg);
+}
+
+.fade {
+    animation: fading;
+    animation-duration: 1s;
+    animation-delay: 200ms;
+    animation-fill-mode: both;
+}
+
+.timer {
+    font-size: 1.1em;
+}
+
+.footer {
+    width: 85vmin;
+}
+
+.wrapper {
+    width: 85vmin;
+    margin: 0 auto;
+    margin-top: 20px;
+
+    border: 1px solid rgb(228, 234, 243);
+    border-radius: 8px;
+}
+
+.fall-animated {
+    animation: fall 3s cubic-bezier(.63,.05,.86,.06);
+}
+
+.fly {
+    animation: flying;
+    animation-duration: 4s;
+    animation-delay: 400ms;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+}
+
+.fly-across {
+    animation: flying-across;
+    animation-duration: 10s;
+    animation-delay: 400ms;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+}
+
+#gallery-list {
+    list-style: none;
+
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 8px;
+}
+
+#gallery-list li {
+    text-decoration: none;
+    
+    display: inline-block;
+}
+
+#reset-btn {
+    width: 2rem;
+    height: 2rem;
+
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGlkPSJtZGktcmVzdGFydCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIsNEMxNC4xLDQgMTYuMSw0LjggMTcuNiw2LjNDMjAuNyw5LjQgMjAuNywxNC41IDE3LjYsMTcuNkMxNS44LDE5LjUgMTMuMywyMC4yIDEwLjksMTkuOUwxMS40LDE3LjlDMTMuMSwxOC4xIDE0LjksMTcuNSAxNi4yLDE2LjJDMTguNSwxMy45IDE4LjUsMTAuMSAxNi4yLDcuN0MxNS4xLDYuNiAxMy41LDYgMTIsNlYxMC42TDcsNS42TDEyLDAuNlY0TTYuMywxNy42QzMuNywxNSAzLjMsMTEgNS4xLDcuOUw2LjYsOS40QzUuNSwxMS42IDUuOSwxNC40IDcuOCwxNi4yQzguMywxNi43IDguOSwxNy4xIDkuNiwxNy40TDksMTkuNEM4LDE5IDcuMSwxOC40IDYuMywxNy42WiIgLz48L3N2Zz4=");
+    background-repeat: no-repeat;
+    background-position: center;
+
+    border-radius: 5px;
+
+    grid-column: 3;
+
+    align-self: center;
+    justify-self: end;
+}
+
+#game {
+    width: 85vmin;
+    height: 85vmin;
+
+    display: grid;
+
+    margin: 0 auto;
+
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+
+    gap: 8px;
+
+    perspective: 600px;
+}
+
+#falling-star {
+    position: fixed;
+    background-image: url('img/star.svg');
+
+    width: 200px;
+    height: 200px;
+
+    background-repeat: no-repeat;
+
+    right: -200px;
+    top: -200px;
+}
+
+#win-screen {
+    position: fixed;
+
+    bottom: -40vmin;
+    left: calc(50% - 20vmin);
+    
+    width: 40vmin;
+    height: 40vmin;
+
+    z-index: 99;
+
+    background-image: url('img/win.webp');
+    background-size: 100% 100%;
+}
+
+#lose-screen {
+    position: fixed;
+
+    top: calc(50% - 20vmin);
+    left: -40vmin;
+    
+    width: 40vmin;
+    height: 20vmin;
+
+    z-index: 99;
+
+    background-image: url('img/lose.webp');
+    background-size: 100% 100%;
+}
+
+@keyframes fading {
+    from { opacity: 1; }
+    to { opacity: 0.3; }
+}
+
+@keyframes fall {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(-207vh, 120vh);
+    }
+}
+
+/* Simulate a sine wave with aproximation */
+@keyframes flying {
+    0%   { transform: translate(0vw, 0vh); }
+
+    5%   { transform: translate(1.5vw, -7.5vh); }
+    10%  { transform: translate(2.9vw, -15vh); }
+    15%  { transform: translate(4vw, -22.5vh); }
+    20%  { transform: translate(4.8vw, -30vh); }
+    25%  { transform: translate(5vw, -37.5vh); }
+
+    30%  { transform: translate(4.8vw, -45vh); }
+    35%  { transform: translate(4vw, -52.5vh); }
+    40%  { transform: translate(2.9vw, -60vh); }
+    45%  { transform: translate(1.5vw, -67.5vh); }
+
+    50%  { transform: translate(0vw, -75vh); }
+
+    55%  { transform: translate(-1.5vw, -82.5vh); }
+    60%  { transform: translate(-2.9vw, -90vh); }
+    65%  { transform: translate(-4vw, -97.5vh); }
+    70%  { transform: translate(-4.8vw, -105vh); }
+    75%  { transform: translate(-5vw, -112.5vh); }
+
+    80%  { transform: translate(-4.8vw, -120vh); }
+    85%  { transform: translate(-4vw, -127.5vh); }
+    90%  { transform: translate(-2.9vw, -135vh); }
+    95%  { transform: translate(-1.5vw, -142.5vh); }
+
+    100% { transform: translate(0vw, -150vh); }
+}
+
+@keyframes flying-across {
+    0%   { transform: translate(0vw, 0) rotateX(0deg); }
+    25%  { transform: translate(37.5vw, 0) rotateX(200deg); }
+    50%  { transform: translate(75vw, 0) rotateX(360deg); }
+    75%  { transform: translate(112.5w, 0) rotateX(520deg); }
+    100% { transform: translate(150vw, 0) rotateX(720deg); }
+}
