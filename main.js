@@ -59,6 +59,7 @@ addEventListener("DOMContentLoaded", () => {
     }
 
     shuffle(deck);
+    let resetBtnBlock = false;
 
     // Create the visuals in the DOM
     function init() {
@@ -67,6 +68,7 @@ addEventListener("DOMContentLoaded", () => {
         // Clean from the previous game
         gameDiv.innerHTML = '';
         document.getElementById('timer').textContent = GAME_TIME;
+        resetBtnBlock = false;
 
         for (let i = 0; i < ROWS; i++) {
             for (let j = 0; j < COLS; j++) {
@@ -183,19 +185,29 @@ addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    const timerEl = document.getElementById('timer');
     function countdown() {
-        const timerEl = document.getElementById('timer');
-
         // You lose!
         if (remainingTime === 0) {
             loseScreen.classList.add('fly-across');
+            clearInterval(intervalFunctionCountdown);
         }
 
-        timerEl.textContent = --remainingTime;
+        --remainingTime;
+
+        if (remainingTime >= 0) {
+            timerEl.textContent = remainingTime
+        }
     }
 
     // Game reset
     document.getElementById('reset-btn').onclick = () => {
+        if (resetBtnBlock) {
+            return;
+        } else {
+            resetBtnBlock = true;
+        }
+
         const playCards = document.querySelectorAll('.game-card');
         // Draw the X
         const indexesToFlipWhenNoGuesses = [0, 5, 7, 10, 14, 15, 20, 21, 25, 28, 30, 35];
