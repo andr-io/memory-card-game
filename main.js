@@ -197,12 +197,32 @@ addEventListener("DOMContentLoaded", () => {
     // Game reset
     document.getElementById('reset-btn').onclick = () => {
         const playCards = document.querySelectorAll('.game-card');
+        // Draw the X
+        const indexesToFlipWhenNoGuesses = [0, 5, 7, 10, 14, 15, 20, 21, 25, 28, 30, 35];
 
-        for (const card of playCards) {
-            if (card.dataset.flipped === 'true') {
+        if (guessedPairs === 0) {
+            for (const card of playCards) {
+                // Reset single flip cards
+                if (card.dataset.flipped === 'true') {
+                    flipCard(card)
+                }
+            }
+
+            for (const idx of indexesToFlipWhenNoGuesses) {
+                const card = playCards[idx];
                 flipCard(card);
+                setTimeout(() => flipCard(card), GAME_RESTART_DELAY / 2 );
+            }
+
+        } else {
+            for (const card of playCards) {
+                if (card.dataset.flipped === 'true') {
+                    flipCard(card);
+                }
             }
         }
+
+        
 
         firstCard = null;
         blocked = false;
